@@ -21,36 +21,78 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'pixfly' ); ?></a>
+  <!--Top Nav content-->
+  <div id="mySidenav" class="sidenav"> <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <nav>
+      <?php
+      wp_nav_menu( array(
+       'theme_location' => 'menu-1',
+       'menu_id'        => 'primary-menu',
+     ) );
+     ?>
+   </nav>
+   <hr>
+   <?php
+   wp_nav_menu( array(
+    'theme_location' => 'menu-2',
+    'menu_id'        => 'secondary-menu',
+    'menu_class'     => 'other-nav',
+  ) );
+  ?>
+  
+  
+  <!--share -->
+  <div class="share-navs">
+    <ul>
+      <li><i class="fa fa-share-alt"></i></li>
+      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+      <li><a href="#"><i class="fa fa-behance"></i></a></li>
+      <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+      <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+    </ul>
+  </div>
+  <!--/share--> 
+  
+</div>
+<!--Top Nav content-->
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-			endif;
+<div id="main-block"> 
 
-			$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-			<?php
-			endif; ?>
-		</div><!-- .site-branding -->
+  <!-- Header section -->
+  <header id="top-header">
+    <div class="container">
+      <div class="row">
+        <?php
+        $custom_logo = get_theme_mod( 'custom_logo' );
+        $logo = wp_get_attachment_image_src( $custom_logo , 'full' );
+        $img = esc_url( $logo[0] );
+       ?>
+        <div class="col-md-3 header-col-1"> <?php if ( has_custom_logo() )
+        {
+          
+        ?><a href="#" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="pull-left logo"></a><?php } ?></div>
+        <div class="col-md-6  header-col-2"><?php if ( has_custom_logo() )
+        {
+          
+        ?> <a href="#" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="pull-left logo"></a><?php } ?>
+          <div class="clearfix"></div>
+          <?php
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'pixfly' ); ?></button>
-			<?php
-				wp_nav_menu( array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				) );
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+          echo '<span class="company-name">' . esc_html(get_bloginfo( 'name' )) . '</span>';
 
-	<div id="content" class="site-content">
+          $pixfly_header_description  = get_theme_mod( 'pixfly_header_description',__( 'Section Description' , 'pixfly' ));
+
+          if ($pixfly_header_description != '') echo '<p class="head-content wow fadeInDown" >' . wp_kses_post( $pixfly_header_description ) . ' </p>'; 
+
+          $pixfly_header_tagline  = get_theme_mod( 'pixfly_header_tagline',__( 'Tagline' , 'pixfly' ));
+
+          if ($pixfly_header_tagline != '') echo '<span class="header-tagline wow zoomIn">' . esc_html( $pixfly_header_tagline ) . ' </span> '; 
+          ?>
+        </div>
+        <div class="col-md-3 header-col-3"> <span  class="pull-right openmenu-nav" onclick="openNav()"><i class="fa  fa-bars "></i></span></div>
+      </div>
+    </div>
+  </header>
+  <!-- /Header section --> 

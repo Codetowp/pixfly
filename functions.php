@@ -46,6 +46,9 @@ if ( ! function_exists( 'pixfly_setup' ) ) :
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'pixfly' ),
 		) );
+		register_nav_menus( array(
+			'menu-2' => esc_html__( 'Secondary', 'pixfly' ),
+		) );
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
@@ -67,6 +70,13 @@ if ( ! function_exists( 'pixfly_setup' ) ) :
 
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
+
+		//Jetpack infinite scroll
+		add_theme_support( 'infinite-scroll', array(
+	'type'           => 'scroll',
+    'container' => 'container',
+    'footer' => 'page',
+    ) );
 
 		/**
 		 * Add support for core custom logo.
@@ -112,6 +122,19 @@ function pixfly_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'pixfly_widgets_init' );
+/**
+ * Enqueue css styles.
+ */
+function pixfly_styles(){    
+	wp_enqueue_style( 'pixfly-bootstrap',get_template_directory_uri() . '/assets/css/bootstrap.css');
+	wp_enqueue_style( 'pixfly-font-awesome',get_template_directory_uri() . '/assets/css/font-awesome.css');
+	wp_enqueue_style( 'pixfly-owl-carousel',get_template_directory_uri() . '/assets/css/owl.carousel.css');
+	wp_enqueue_style( 'pixfly-owl-theme',get_template_directory_uri() . '/assets/css/owl.theme.css');
+	wp_enqueue_style( 'pixfly-animate',get_template_directory_uri() . '/assets/css/animate.css');
+	wp_enqueue_style( 'pixfly-lity',get_template_directory_uri() . '/assets/css/lity.css');
+	wp_enqueue_style( 'pixfly-font-google-api','https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:100,200,300,300i,400,500,600,700,800,900|Lato:100,300,400,700,900');
+}
+add_action( 'wp_enqueue_scripts', 'pixfly_styles' );
 
 /**
  * Enqueue scripts and styles.
@@ -119,13 +142,28 @@ add_action( 'widgets_init', 'pixfly_widgets_init' );
 function pixfly_scripts() {
 	wp_enqueue_style( 'pixfly-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'pixfly-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_script( 'pixfly-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
 
-	wp_enqueue_script( 'pixfly-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	wp_enqueue_script( 'pixfly-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+	wp_enqueue_script('jquery');
+	wp_enqueue_script( 'pixfly-modernizr', get_template_directory_uri() . '/assets/js/modernizr.custom.js', array(), '20151215', false );
+	wp_enqueue_script( 'pixfly-bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.js', array(), '20151215', true ); 
+	wp_enqueue_script( 'pixfly-SmoothScroll-js', get_template_directory_uri() . '/assets/js/SmoothScroll.js', array(), '20151215', true );  
+	wp_enqueue_script( 'pixfly-lity-js', get_template_directory_uri() . '/assets/js/lity.js', array(), '20151215', true ); 
+	wp_enqueue_script( 'pixfly-owl-carousel-js', get_template_directory_uri() . '/assets/js/owl.carousel.js', array(), '20151215', true );
+	wp_enqueue_script( 'pixfly-jquery-isotope-js', get_template_directory_uri() . '/assets/js/jquery.isotope.js', array(), '20151215', true );
+	wp_enqueue_script( 'pixfly-main-js', get_template_directory_uri() . '/assets/js/main.js', array(), '20151215', true ); 
+	wp_enqueue_script( 'pixfly-wow-min-js', get_template_directory_uri() . '/assets/js/wow.min.js', array(), '20151215', true );    
+	wp_enqueue_script( 'pixfly-classie-js', get_template_directory_uri() . '/assets/js/classie.js', array(), '20151215', true );  
+	wp_add_inline_script('pixfly-wow-min-js','new WOW().init();');
+	wp_add_inline_script('pixfly-main-js','function openNav() {document.getElementById("mySidenav").style.width = "320px";
+                         document.getElementById("main-block").style.marginRight = "320px";}
+                         function closeNav() {document.getElementById("mySidenav").style.width = "0";
+                         document.getElementById("main-block").style.marginRight= "0";}');
 }
 add_action( 'wp_enqueue_scripts', 'pixfly_scripts' );
 
