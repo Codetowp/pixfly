@@ -2641,18 +2641,20 @@ embed, iframe, object {
 	display: inline-block;
 	position: absolute;
 	width: 26%;
-	height: 50vh;
+	height: 60vh;
 	z-index: -1;
 	margin-top: -17%;
 	margin-left: -50px;
 }
 #home-banner .row-with-content h1 {
-	font-weight: 900;
-	font-size: 42px;
-	display: block;
-	font-family: 'Lato', sans-serif;
-	text-transform: uppercase;
-	margin-bottom: 10px;
+	color: #3c434d;
+    font-weight: 900;
+    font-size: 42px;
+    display: block;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    max-width: 370px;
 }
 #home-banner .row-with-content a {
 	font-size: 16px;

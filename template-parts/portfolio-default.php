@@ -75,12 +75,15 @@
                         <div class="hover-bg"> <a href="<?php the_permalink(); ?>">
                           <div class="hover-text"> <small>
                             <?php 
-                            $before='';
-                            $after='';
-                            $separator=',';
-                            $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' );
-                            the_terms(get_the_ID(), $pixfly_portfolio_terms, $before, $separator, $after); 
-                            ?></small>
+                           $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' );
+                           $terms=get_the_terms(get_the_ID(), $pixfly_portfolio_terms); 
+                           foreach ($terms as $term) {
+                             echo esc_html( $term->name);
+                             if (next($terms )) {
+                              echo esc_html(','); 
+                            }
+                          }
+                          ?></small>
                             <h2><?php the_title(); ?></h2>
                             <div class="clearfix"></div>
                             <span><?php echo esc_html__('Vew Case Study','pixfly') ; ?></span> </div>

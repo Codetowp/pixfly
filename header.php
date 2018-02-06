@@ -19,8 +19,8 @@
 
 	<?php wp_head(); ?>
 </head>
-
-<body <?php body_class(); ?>>
+<?php  $blog_layout = get_theme_mod('pixfly_blog_layout',__('default','pixfly'));?>
+<body <?php if( is_home() && $blog_layout =='default'){  body_class('with-sidebar blog-layout-b'); } else{ body_class();}?>>
   <!--Top Nav content-->
   <div id="mySidenav" class="sidenav"> <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <nav>
@@ -44,6 +44,14 @@
   <!--share -->
   <div class="share-navs">
     <ul>
+       <?php
+                        if ( $socials = get_theme_mod( 'social' ) ){
+                            $socials = $socials ? array_filter( $socials ) : array();
+                            foreach ( $socials as $social => $name ) {
+                                printf(' <li> <a href="%s" ><i class="fa fa-%s"></i></a></li> ', esc_url( $name ), esc_html( $social ) );
+                            }
+                        }
+                        if( get_theme_mod( 'social' ) == '' ){ ?>
       <li><i class="fa fa-share-alt"></i></li>
       <li><a href="#"><i class="fa fa-facebook"></i></a></li>
       <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -51,6 +59,7 @@
       <li><a href="#"><i class="fa fa-behance"></i></a></li>
       <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
       <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+      <?php } ?>
     </ul>
   </div>
   <!--/share--> 
@@ -72,11 +81,11 @@
         <div class="col-md-3 header-col-1"> <?php if ( has_custom_logo() )
         {
           
-        ?><a href="#" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="pull-left logo"></a><?php } ?></div>
+        ?><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="pull-left logo"></a><?php } ?></div>
         <div class="col-md-6  header-col-2"><?php if ( has_custom_logo() )
         {
           
-        ?> <a href="#" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="pull-left logo"></a><?php } ?>
+        ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="pull-left logo"></a><?php } ?>
           <div class="clearfix"></div>
           <?php
 

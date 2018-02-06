@@ -49,7 +49,9 @@ if ( ! function_exists( 'pixfly_setup' ) ) :
 		register_nav_menus( array(
 			'menu-2' => esc_html__( 'Secondary', 'pixfly' ),
 		) );
-
+        register_nav_menus( array(
+			'menu-3' => esc_html__( 'Footer', 'pixfly' ),
+		) );
 		/*
 		 * Switch default core markup for search form, comment form, and comments
 		 * to output valid HTML5.
@@ -70,14 +72,6 @@ if ( ! function_exists( 'pixfly_setup' ) ) :
 
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
-
-		//Jetpack infinite scroll
-		add_theme_support( 'infinite-scroll', array(
-	'type'           => 'scroll',
-    'container' => 'container',
-    'footer' => 'page',
-    ) );
-
 		/**
 		 * Add support for core custom logo.
 		 *
@@ -122,6 +116,8 @@ function pixfly_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'pixfly_widgets_init' );
+// Custom Theme Image Sizes
+	add_image_size( 'pixfly_blog_post', 750, 422,  array( 'top', 'center' ) );
 /**
  * Enqueue css styles.
  */
@@ -158,7 +154,9 @@ function pixfly_scripts() {
 	wp_enqueue_script( 'pixfly-jquery-isotope-js', get_template_directory_uri() . '/assets/js/jquery.isotope.js', array(), '20151215', true );
 	wp_enqueue_script( 'pixfly-main-js', get_template_directory_uri() . '/assets/js/main.js', array(), '20151215', true ); 
 	wp_enqueue_script( 'pixfly-wow-min-js', get_template_directory_uri() . '/assets/js/wow.min.js', array(), '20151215', true );    
-	wp_enqueue_script( 'pixfly-classie-js', get_template_directory_uri() . '/assets/js/classie.js', array(), '20151215', true );  
+	wp_enqueue_script( 'pixfly-classie-js', get_template_directory_uri() . '/assets/js/classie.js', array(), '20151215', true );
+	wp_enqueue_script( 'pixfly-imagesloaded-js', get_template_directory_uri() . '/assets/js/imagesloaded.js', array(), '20151215', true );
+	wp_enqueue_script( 'pixfly-AnimOnScroll-js', get_template_directory_uri() . '/assets/js/AnimOnScroll.js', array(), '20151215', true );  
 	wp_add_inline_script('pixfly-wow-min-js','new WOW().init();');
 	wp_add_inline_script('pixfly-main-js','function openNav() {document.getElementById("mySidenav").style.width = "320px";
                          document.getElementById("main-block").style.marginRight = "320px";}

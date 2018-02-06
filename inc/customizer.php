@@ -200,7 +200,7 @@ function pixfly_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( 'pixfly_portfolio_layout', array(
-		'label'   => 'Portfolio Layout',
+		'label'   => __('Portfolio Layout','pixfly'),
 		'section' => 'pixfly_portfolio_section',
 		'type'    => 'radio',
 		'choices' => array(
@@ -210,8 +210,56 @@ function pixfly_customize_register( $wp_customize ) {
 		),
 		'priority' => 4
 	) );
+	$wp_customize->add_section( 'pixfly_social_links', array(
+		'title'    					=> esc_html__( 'Social Links', 'pixfly'  ),
+		'priority'                  => 110,
+		'panel'                     => 'pixfly_general_panel'
+
+		
+	) );
+
+	$social_sites = array( 'facebook', 'twitter','google-plus',  'behance', 'dribbble', 'tumblr', 'youtube', 'pinterest', 'instagram', 'linkedin');
+
+	foreach( $social_sites as $social_site ) 
+	{
+	$wp_customize->add_setting( "pixfly_social[$social_site]", array(
+			'type'              	=> 'theme_mod',
+			'capability'        	=> 'edit_theme_options',
+			'sanitize_callback' 	=> 'esc_url_raw'
+		) );
+
+	$wp_customize->add_control( "pixfly_social[$social_site]", array(
+			'label'   				=> ucwords( $social_site ) . __( " Url:", 'pixfly' ),
+			'section' 				=> 'pixfly_social_links',
+			'type'    				=> 'text',
+		) );
+	}
+
+  //Blog settings
+	$wp_customize->add_section('pixfly_blog_section', array(
+		'title'                     => __('Blog Section', 'pixfly'),
+		'description'               => __('Blog settings','pixfly'),
+		'priority'                  => 80,
+		'panel'                     => 'pixfly_general_panel'
 
 
+	));
+	$wp_customize->add_setting( 'pixfly_blog_layout', array(
+		'default'                  => 'default',
+		'sanitize_callback'        =>'pixfly_sanitize_choices',
+	) );
+
+	$wp_customize->add_control( 'pixfly_blog_layout', array(
+		'label'   => __('Blog Layout','pixfly'),
+		'section' => 'pixfly_blog_section',
+		'type'    => 'radio',
+		'choices' => array(
+			'default'   =>  esc_html__( 'Default layout', 'pixfly' ),
+			'metro'       =>  esc_html__( 'Metro layout ', 'pixfly' ),
+			             
+		),
+		'priority' => 4
+	) );
 
 
 

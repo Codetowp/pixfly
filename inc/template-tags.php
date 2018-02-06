@@ -145,3 +145,4 @@ function pixfly_post_thumbnail() {
 	<?php endif; // End is_singular().
 }
 endif;
+
