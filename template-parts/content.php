@@ -8,15 +8,51 @@
  */
 
 ?>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<header class="entry-header">
+		<?php
+		if ( is_singular() ) :
+			the_title( '<h1 class="entry-title">', '</h1>' );
+		else :
+			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+		endif;
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="wow fadeInUp">
-	
-          <header class="entry-header"> <img src="<?php the_post_thumbnail_url('pixfly_blog_post'); ?>">
-            <div class="content-block"> <a href="#">
-              <h2><?php the_title(); ?></h2>
-              </a>
-              <p><?php echo esc_html( wp_trim_words( get_the_content(), 10, '...' ));?></p>
-              <span class="date-article">2 days ago</span> <a href="#" class="btn btn-nobordered"><i class="fa fa-arrow-right"></i> Read more</a> </div>
-          </header>
-        
-</article>
+		if ( 'post' === get_post_type() ) : ?>
+		<div class="entry-meta">
+			<?php
+			pixfly_posted_on();
+			pixfly_posted_by();
+			?>
+		</div><!-- .entry-meta -->
+		<?php
+		endif; ?>
+	</header><!-- .entry-header -->
+
+	<?php pixfly_post_thumbnail(); ?>
+
+	<div class="entry-content">
+		<?php
+		the_content( sprintf(
+			wp_kses(
+				/* translators: %s: Name of current post. Only visible to screen readers */
+				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'pixfly' ),
+				array(
+					'span' => array(
+						'class' => array(),
+					),
+				)
+			),
+			get_the_title()
+		) );
+
+		wp_link_pages( array(
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'pixfly' ),
+			'after'  => '</div>',
+		) );
+		?>
+	</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+		<?php pixfly_entry_footer(); ?>
+	</footer><!-- .entry-footer -->
+</article><!-- #post-<?php the_ID(); ?> -->

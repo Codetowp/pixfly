@@ -29,18 +29,18 @@ get_header(); ?>
         $pixfly_link_url=get_theme_mod( 'pixfly_Banner_link_url',esc_url('#','pixfly'));
         ?>
         <a href="<?php echo esc_url($pixfly_header_intro_link_url); ?>"><?php echo esc_html($pixfly_header_intro_link_text); ?></a> 
-      </div>
     </div>
-    <!--/image row with content--> 
-    
-    <!--image row  without content-->
-    <?php 
-    $pixfly_header_intro_image= get_theme_mod('pixfly_header_intro_image',get_template_directory_uri() . '/assets/img/bg-1.jpg');
-    ?>
-    <div class="col-md-6 row-without-content wow fadeInLeft" style="background-image:url(<?php echo esc_url($pixfly_header_intro_image); ?>);"> </div>
-    <!--image row without content--> 
-    
-  </div>
+</div>
+<!--/image row with content--> 
+
+<!--image row  without content-->
+<?php 
+$pixfly_header_intro_image= get_theme_mod('pixfly_header_intro_image',get_template_directory_uri() . '/assets/img/bg-1.jpg');
+?>
+<div class="col-md-6 row-without-content wow fadeInLeft" style="background-image:url(<?php echo esc_url($pixfly_header_intro_image); ?>);"> </div>
+<!--image row without content--> 
+
+</div>
 </Section>
 
   <!-- Portfolio Section

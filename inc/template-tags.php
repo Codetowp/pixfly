@@ -14,7 +14,11 @@ if ( ! function_exists( 'pixfly_posted_on' ) ) :
 	function pixfly_posted_on() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+			$time_string = '<time class="updated" datetime="%3$s">%4$s</time>';
+		}
+		else{
+
+			$time_string= '<time class="entry-date published" datetime="%1$s">%2$s</time>';
 		}
 
 		$time_string = sprintf( $time_string,
@@ -26,8 +30,8 @@ if ( ! function_exists( 'pixfly_posted_on' ) ) :
 
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'pixfly' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+			esc_html_x( ' %s', 'post date', 'pixfly' ),
+			 $time_string 
 		);
 
 		echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
@@ -146,3 +150,49 @@ function pixfly_post_thumbnail() {
 }
 endif;
 
+if(! function_exists('pixfly_days_ago')):
+/**
+ * Displays posted days.
+ *
+ */
+function pixfly_days_ago(){
+
+$days = round((date('U') - get_the_time('U')) / (60*60*24));
+	if ($days==0) {
+		echo esc_html(" today "); 
+	}
+	elseif ($days==1) {
+		echo esc_html( "yesterday "); 
+	}
+	elseif ($days > 10) {
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$time_string = '<time class="updated" datetime="%3$s">%4$s</time>';
+	}
+	else{
+
+			$time_string= '<time class="entry-date published" datetime="%1$s">%2$s</time>';
+		}
+
+	$time_string = sprintf( $time_string,
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_attr( get_the_modified_date( 'c' ) ),
+		esc_html( get_the_modified_date() )
+	);
+
+	$posted_on = sprintf(
+		/* translators: %s: post date. */
+		esc_html( '%s', 'post date', 'pixfly' ),$time_string 
+	);
+    $sep=' ';
+	echo wp_kses_post( '<span class="posted-on">'. $posted_on,$sep.'</span>'); 
+	}
+	else {
+		echo wp_kses_post( $days . " days ago ");
+	} 
+}
+
+
+
+endif;
