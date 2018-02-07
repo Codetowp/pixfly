@@ -14,7 +14,7 @@
 <footer class="footer-bottom">
   <div class="container">
     <div class="row text-center"> 
-      
+
       <!--footer logos-->
       <?php
       $custom_logo = get_theme_mod( 'custom_logo' );
@@ -23,7 +23,7 @@
       ?>
       <div class="col-md-12 footer-logos"><?php if ( has_custom_logo() )
       {
-        
+
         ?> <a href="#" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="logo"></a><?php } 
 
         echo '<span class="company-name">' . esc_html(get_bloginfo( 'name' )) . '</span>'; ?> </div>
@@ -69,7 +69,7 @@
     
     <!--footer copyright-->
     <div class="col-md-12 footer-copyright">
-      <p>© Copyright 2017. All rights reserved. </p>
+      <p><?php esc_html_e('ALL RIGHTS RESERVED. COPYRIGHT &#169; 2017. A theme by', 'pixfly');?> </p>
     </div>
     <!--/footer copyright--> 
     

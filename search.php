@@ -9,16 +9,18 @@
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
+<div class="container with-sidebar blog-layout-b">
+	<div class="row"> 
+		<!--blog  container-->
+		<div class="col-md-8 col-sm-12">
 
-		<?php
-		if ( have_posts() ) : ?>
+			<?php
+			if ( have_posts() ) : ?>
 
 			<header class="page-header">
 				<h1 class="page-title"><?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'pixfly' ), '<span>' . get_search_query() . '</span>' );
+				/* translators: %s: search query. */
+				printf( esc_html__( 'Search Results for: %s', 'pixfly' ), '<span>' . get_search_query() . '</span>' );
 				?></h1>
 			</header><!-- .page-header -->
 
@@ -41,11 +43,20 @@ get_header(); ?>
 
 			get_template_part( 'template-parts/content', 'none' );
 
-		endif; ?>
+			endif; ?>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
-
+		</div>
+		<!--blog container--> 
+		
+		<!--aside-->
+		<aside class="col-md-4 col-sm-12" > 
+			<?php get_sidebar(); ?>
+			
+		</aside>
+		<!--aside-->
+		
+		<div class="clearfix"></div>
+	</div>
+</div>
 <?php
-get_sidebar();
 get_footer();

@@ -13,6 +13,10 @@
  */
 
 get_header(); ?>
+<?php $blog_layout = get_theme_mod('pixfly_blog_layout',__('default','pixfly')); 
+
+if($blog_layout =='default'){ 
+  ?>
   <div class="container">
     <div class="row"> 
       <!--blog  container-->
@@ -20,45 +24,84 @@ get_header(); ?>
         <?php if ( have_posts() ) :
         /* Start the Loop */
         while ( have_posts() ) : the_post();
-        
-          get_template_part( 'template-parts/content', get_post_format() );
           
-        endwhile; ?>
-       
-		
-        <!--page nav-->
-        <nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
-          <ul>
-            <li>
-             <?php
-            the_posts_pagination(
-              array(
-                'prev_text' => '<i class="fa fa-chevron-left"></i>' ,
-                'next_text' =>  '<i class="fa fa-chevron-right"></i>',
-              )
-            );
-            ?>
-          </li>
+          get_template_part( 'template-parts/content', 'default' );
+          
+          endwhile; ?>
+          
+          
+          <!--page nav-->
+          <nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
+            <ul>
+              <li>
+               <?php
+               the_posts_pagination(
+                array(
+                  'prev_text' => '<i class="fa fa-chevron-left"></i>' ,
+                  'next_text' =>  '<i class="fa fa-chevron-right"></i>',
+                )
+              );
+              ?>
+            </li>
           </ul>
         </nav>
         <!--page nav--> 
-        <?php else :
-        
-          get_template_part( 'template-parts/content', 'none' );
-          
-        endif; ?>
-      </div>
-      <!--blog container--> 
+      <?php else :
       
-      <!--aside-->
-      <aside class="col-md-4 col-sm-12" > 
-        <?php get_sidebar(); ?>
-        
-      </aside>
-      <!--aside-->
+      get_template_part( 'template-parts/content', 'none' );
       
-      <div class="clearfix"></div>
+      endif; ?>
     </div>
+    <!--blog container--> 
+    
+    <!--aside-->
+    <aside class="col-md-4 col-sm-12" > 
+      <?php get_sidebar(); ?>
+      
+    </aside>
+    <!--aside-->
+    
+    <div class="clearfix"></div>
   </div>
-  <?php
+</div>
+<?php } else{?>
+<section class="page-article-block text-center"> 
+  
+  <!--/article 1--> 
+  <?php if ( have_posts() ) :
+  /* Start the Loop */
+  while ( have_posts() ) : the_post();
+    
+    get_template_part( 'template-parts/content', 'metro' );
+    
+    endwhile; ?>
+    
+    
+    <!--page nav-->
+    <nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
+      <ul>
+        <li>
+         <?php
+         the_posts_pagination(
+          array(
+            'prev_text' => '<i class="fa fa-chevron-left"></i>' ,
+            'next_text' =>  '<i class="fa fa-chevron-right"></i>',
+          )
+        );
+        ?>
+      </li>
+    </ul>
+  </nav>
+  <!--page nav--> 
+<?php else :
+
+get_template_part( 'template-parts/content', 'none' );
+
+endif; ?>
+<!--page nav--> 
+
+</section>
+
+
+<?php }
 get_footer();

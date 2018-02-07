@@ -42,12 +42,14 @@
            <div id="lightbox"  >
              <?php 
              $posts_per_page_portfolio = get_theme_mod( 'pixfly_portfolio_section_count',8 );
-             $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+             
              $args = array(
               'post_type'      => 'jetpack-portfolio',
               'posts_per_page' => $posts_per_page_portfolio,
-              'paged'          => $paged ,
+              'paged' => ( get_query_var('page', 1)),
             );
+             
+             
              $project_query = new WP_Query ( $args );
 
              if ( post_type_exists( 'jetpack-portfolio' ) && $project_query -> have_posts() ) :
@@ -92,26 +94,37 @@
                         <img src="<?php the_post_thumbnail_url('pixfly_portfolio-default');?>" class="img-responsive" alt="..."> </a> </div>
                       </div>
                     </div>
-                  <?php  endwhile; endif;  wp_reset_postdata();?> 
+                  <?php  endwhile; endif; wp_reset_postdata(); ?> 
                 </div>
 
                 <!--page nav-->
                 <nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
                   <ul>
-                    <li class="pull-left">
-                      <div class="nav-previous"><a href=""><i class="fa fa-chevron-left"></i></a></div>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li class="pull-right">
-                      <div class="nav-next"><a href="http://localhost/wordpress/page/2/"><i class="fa fa-chevron-right"></i></a></div>
-                    </li>
-                  </ul>
-                </nav>
-                <!--page nav--> 
+                    
+                   <?php
+                   global $wp_query;
+                   
+                   $count_posts = wp_count_posts('jetpack-portfolio');
+                   $published_posts = $count_posts->publish;
+                   $page = get_query_var( 'page', 1 );  
+$big = 999999999; // need an unlikely integer
 
-              </div>
-            </section>
+$paginate_links= paginate_links( array(
+  'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+  'format' => '?paged=%#%',
+  'total' => $published_posts,
+  'current'=>$page,
+) );
+if ( $paginate_links ) {
+  echo '<li>';
+  echo wp_kses_post($paginate_links);
+  echo '</li>';
+  
+}
+?>   
+</ul>
+</nav>
+<!--page nav--> 
+
+</div>
+</section>

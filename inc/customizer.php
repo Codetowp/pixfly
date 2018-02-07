@@ -222,13 +222,13 @@ function pixfly_customize_register( $wp_customize ) {
 
 	foreach( $social_sites as $social_site ) 
 	{
-	$wp_customize->add_setting( "pixfly_social[$social_site]", array(
+		$wp_customize->add_setting( "pixfly_social[$social_site]", array(
 			'type'              	=> 'theme_mod',
 			'capability'        	=> 'edit_theme_options',
 			'sanitize_callback' 	=> 'esc_url_raw'
 		) );
 
-	$wp_customize->add_control( "pixfly_social[$social_site]", array(
+		$wp_customize->add_control( "pixfly_social[$social_site]", array(
 			'label'   				=> ucwords( $social_site ) . __( " Url:", 'pixfly' ),
 			'section' 				=> 'pixfly_social_links',
 			'type'    				=> 'text',
@@ -256,11 +256,78 @@ function pixfly_customize_register( $wp_customize ) {
 		'choices' => array(
 			'default'   =>  esc_html__( 'Default layout', 'pixfly' ),
 			'metro'       =>  esc_html__( 'Metro layout ', 'pixfly' ),
-			             
+
 		),
 		'priority' => 4
 	) );
+	$wp_customize->add_setting( 'pixfly_single_blog_layout', array(
+		'default'                  => 'default',
+		'sanitize_callback'        =>'pixfly_sanitize_choices',
+	) );
 
+	$wp_customize->add_control( 'pixfly_single_blog_layout', array(
+		'label'   => __('Single post Layout','pixfly'),
+		'section' => 'pixfly_blog_section',
+		'type'    => 'radio',
+		'choices' => array(
+			'default'   =>  esc_html__( 'Default layout', 'pixfly' ),
+			'sidebar-post'       =>  esc_html__( 'Sidebar layout ', 'pixfly' ),
+
+		),
+		'priority' => 5
+	) );
+	//get in touch
+	$wp_customize->add_section('getin_touch_section', array(
+            'title'                     => __('Getin Touch Section', 'pixfly'),
+            'priority'                  => 1,   
+            'description'     		    => 'edit your portfolio getin touch section',
+            'panel'                     => 'pixfly_panel_2'
+
+        ));
+    
+        $wp_customize->add_setting( 'getin_touch_section_header', array(      
+            'default'                   => esc_html__('Section Title', 'pixfly'),
+            'sanitize_callback'         => 'sanitize_text_field',
+            'transport'                 => 'refresh', // refresh or postMessage              
+        ) );    
+
+        $wp_customize->add_control( 'getin_touch_section_header', array(
+            'type'						=> 'text',
+            'label' 					=> __( 'Header', 'pixfly' ),
+            'section'  					=> 'getin_touch_section',
+            'priority' 					=> 1,
+        ) );
+    
+        
+        $wp_customize->add_setting( 'getin_touch_section_tag_line', array(      
+            'default'                   => esc_html__('Section Tag Line', 'pixfly'),
+            'sanitize_callback'         => 'sanitize_text_field',
+            'transport'                 => 'refresh', // refresh or postMessage              
+        ) );    
+
+        $wp_customize->add_control( 'getin_touch_section_tag_line', array(
+            'type'						=> 'text',
+            'label' 					=> __( 'Tag Line', 'pixfly' ),
+            'section'  					=> 'getin_touch_section',
+            'priority' 					=> 2,
+        ) );
+    
+        $wp_customize->add_setting( 'getin_touch_section_image', array(
+            'default'           => esc_url( get_template_directory_uri() . '/assets/img/bg-1.jpg' ),
+            'type'                      => 'theme_mod',
+            'capability'                => 'edit_theme_options',
+            'sanitize_callback'         => 'esc_url_raw',
+        ) );
+
+        $wp_customize->add_control( new WP_Customize_Image_Control(
+            $wp_customize,'getin_touch_section_bck_image', array(
+            'label'                     => __( 'Background Image', 'pixfly' ),
+            'section'                   => 'getin_touch_section',
+            'settings'                  => 'getin_touch_section_image',
+            'context'                   => 'getin_touch_section_image',
+            'priority'                  => 20,
+            ) 
+        ) );
 
 
 }
