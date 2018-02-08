@@ -16,7 +16,7 @@
         <li >
           <ol class="type">
            <?php
-           $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' );
+           $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms',__('jetpack-portfolio-type','pixfly') );
                        $terms = get_terms($pixfly_portfolio_terms); //change to a different POST TYPE (Jetpack Portfolio Project/Category Type)
                        $count = count($terms);
                        $tab_count = get_theme_mod( 'pixfly_portfolio_tab_count',3 );
@@ -75,7 +75,7 @@
                         <div class="hover-bg"> <a href="<?php the_permalink(); ?>">
                           <div class="hover-text"> <small>
                             <?php 
-                            $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' );
+                            $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms',__('jetpack-portfolio-type','pixfly'));
                             $terms=get_the_terms(get_the_ID(), $pixfly_portfolio_terms); 
                             foreach ($terms as $term) {
                              echo esc_html( $term->name);
