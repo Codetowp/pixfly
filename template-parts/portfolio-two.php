@@ -15,7 +15,7 @@
         <li >
           <ol class="type"> 
            <?php
-           $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms',__('jetpack-portfolio-type','pixfly') );
+           $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms','jetpack-portfolio-type');
                      $terms = get_terms($pixfly_portfolio_terms); //change to a different POST TYPE (Jetpack Portfolio Project/Category Type)
                      $count = count($terms);
                      $tab_count = get_theme_mod( 'pixfly_portfolio_tab_count',4);
@@ -51,7 +51,7 @@
 
            while ( $project_query -> have_posts() ) : $project_query -> the_post();
 
-            $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' ,__('jetpack-portfolio-type','pixfly'));
+            $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' ,'jetpack-portfolio-type'));
 
                   $terms = get_the_terms( $post->ID, $pixfly_portfolio_terms ); //get our portfolio categories to a single project                  
 

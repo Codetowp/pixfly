@@ -52,7 +52,7 @@
 
                while ( $project_query -> have_posts() ) : $project_query -> the_post();
 
-                $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' );
+                $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms','jetpack-portfolio-type' );
 
                     $terms = get_the_terms( $post->ID, $pixfly_portfolio_terms); //get our portfolio categories to a single project                  
 
@@ -87,7 +87,7 @@
                           <h2><?php the_title(); ?></h2>
                           <div class="clearfix"></div>
                           <span><?php echo esc_html__('Vew Case Study','pixfly') ; ?></span> </div>
-                          <img src="<?php the_post_thumbnail_url('pixfly_portfolio-default');?>" class="img-responsive" alt="..."> </a> </div>
+                          <img src="<?php the_post_thumbnail_url('pixfly_default_portfolio');?>" class="img-responsive" alt="..."> </a> </div>
                         </div>
                       </div>
                     <?php  endwhile; endif;  wp_reset_postdata();?> 
