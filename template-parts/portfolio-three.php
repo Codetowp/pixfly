@@ -56,7 +56,7 @@
 
                while ( $project_query -> have_posts() ) : $project_query -> the_post();
 
-                $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' );
+                $pixfly_portfolio_terms = get_theme_mod( 'pixfly_portfolio_terms' ,'jetpack-portfolio-type');
 
                     $terms = get_the_terms( $post->ID, $pixfly_portfolio_terms ); //get our portfolio categories to a single project                  
 
@@ -91,7 +91,7 @@
                         <h2><?php the_title(); ?></h2>
                         <div class="clearfix"></div>
                         <p class="read-well"><?php esc_html_e('Vew Case Study','pixfly'); ?></p> </div>
-                        <img src="<?php the_post_thumbnail_url('pixfly_portfolio-default');?>" class="img-responsive" alt="..."> </a> </div>
+                        <img src="<?php the_post_thumbnail_url('pixfly_three_portfolio');?>" class="img-responsive" alt="..."> </a> </div>
                       </div>
                     </div>
                   <?php  endwhile; endif; wp_reset_postdata(); ?> 
@@ -105,23 +105,27 @@
                    global $wp_query;
                    
                    $count_posts = wp_count_posts('jetpack-portfolio');
+                   $posts_display_count = get_theme_mod( 'pixfly_portfolio_section_count',8 );
                    $published_posts = $count_posts->publish;
-                   $page = get_query_var( 'page', 1 );  
-$big = 999999999; // need an unlikely integer
+                   $total =$published_posts / $posts_display_count;
+                   if(is_float($total)){ $page_total= $total + 1 ;}
 
-$paginate_links= paginate_links( array(
-  'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-  'format' => '?paged=%#%',
-  'total' => $published_posts,
-  'current'=>$page,
-) );
-if ( $paginate_links ) {
-  echo '<li>';
-  echo wp_kses_post($paginate_links);
-  echo '</li>';
-  
-}
-?>   
+                   $page = get_query_var( 'page', 1 );  
+                  $big = 999999999; // need an unlikely integer
+
+                  $paginate_links= paginate_links( array(
+                    'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                    'format' => '?paged=%#%',
+                    'total' => $page_total,
+                    'current'=>$page,
+                  ) );
+                  if ( $paginate_links ) {
+                    echo '<li>';
+                    echo wp_kses_post($paginate_links);
+                    echo '</li>';
+                    
+                  }
+                  ?>   
 </ul>
 </nav>
 <!--page nav--> 

@@ -10,8 +10,8 @@
  */
 
 ?>
-
-<footer class="footer-bottom">
+<?php $footer_url = get_theme_mod('pixfly_footer_image',get_template_directory_uri() . '/assets/img/footer.jpg') ?>
+<footer class="footer-bottom" style="background-image:url(<?php echo esc_url($footer_url)?>); ">
   <div class="container">
     <div class="row text-center"> 
 

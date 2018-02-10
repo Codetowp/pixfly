@@ -45,21 +45,12 @@ wp_nav_menu( array(
 <div class="share-navs">
 <ul>
 <?php
-if ( $socials = get_theme_mod( 'social' ) ){
+if ( $socials = get_theme_mod( 'pixfly_social' ) ){
 $socials = $socials ? array_filter( $socials ) : array();
 foreach ( $socials as $social => $name ) {
   printf(' <li> <a href="%s" ><i class="fa fa-%s"></i></a></li> ', esc_url( $name ), esc_html( $social ) );
 }
-}
-if( get_theme_mod( 'social' ) == '' ){ ?>
-<li><i class="fa fa-share-alt"></i></li>
-<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-<li><a href="#"><i class="fa fa-behance"></i></a></li>
-<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-<li><a href="#"><i class="fa fa-tumblr"></i></a></li>
-<?php } ?>
+} ?>
 </ul>
 </div>
 <!--/share--> 

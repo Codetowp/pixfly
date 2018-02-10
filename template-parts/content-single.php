@@ -36,7 +36,7 @@ $single_layout= get_theme_mod('pixfly_single_blog_layout',__('default','pixfly')
       
       if ( $user ) :
         ?>
-        <img src="<?php echo esc_url( get_avatar_url( $user->ID ) ); ?>" />
+        <img src="<?php echo esc_url( get_avatar_url( $user->ID ,array('size'=>30)) ); ?>" />
       <?php endif; ?>
       <h6><?php pixfly_posted_by(); ?></h6>
     </div>
@@ -52,18 +52,7 @@ $single_layout= get_theme_mod('pixfly_single_blog_layout',__('default','pixfly')
           foreach ( $socials as $social => $name ) {
             printf(' <li> <a href="%s" ><i class="fa fa-%s"></i></a></li> ', esc_url( $name ), esc_html( $social ) );
           }
-        }
-        if( get_theme_mod( 'social' ) == '' ){ ?>
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-        <li><a href="#"><i class="fa fa-behance"></i></a></li>
-        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-        <?php } ?>
+        } ?>
       </ul>
     </div>
     <!--/share-->

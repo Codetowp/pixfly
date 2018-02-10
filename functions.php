@@ -128,6 +128,9 @@ function pixfly_widgets_init() {
 add_action( 'widgets_init', 'pixfly_widgets_init' );
 // Custom Theme Image Sizes
 add_image_size( 'pixfly_blog_post', 750, 422,  array( 'top', 'center' ) );
+add_image_size( 'pixfly_three_portfolio', 1349, 380,  array( 'top', 'center' ) );
+add_image_size( 'pixfly_default_portfolio', 390, 380,  array( 'top', 'center' ) );
+
 /**
  * Enqueue css styles.
  */

@@ -14,6 +14,7 @@ function pixfly_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+	$wp_customize->get_control( 'header_image'  )->section   = 'pixfly_header_intro';
 
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial( 'blogname', array(
@@ -130,22 +131,7 @@ function pixfly_customize_register( $wp_customize ) {
 		'section'                   => 'pixfly_header_intro',
 		'priority'                  => 18,
 	) );   
-	$wp_customize->add_setting( 'pixfly_header_intro_image', array(
-		'default'                   => esc_url( get_template_directory_uri() . '/assets/img/bg-1.jpg' ),
-		'type'                      => 'theme_mod',
-		'capability'                => 'edit_theme_options',
-		'sanitize_callback'         => 'esc_url_raw',
-	) );
-
-	$wp_customize->add_control( new WP_Customize_Image_Control(
-		$wp_customize,'pixfly_header_intro_image', array(
-			'label'                     => __( 'Background Image', 'pixfly' ),
-			'section'                   => 'pixfly_header_intro',
-			'settings'                  => 'pixfly_header_intro_image',
-			'context'                   => 'pixfly_header_intro_image',
-			'priority'                  => 19,
-		) 
-	) );
+	
 
 
 	/*********Portfolio Section**********/
@@ -328,7 +314,31 @@ function pixfly_customize_register( $wp_customize ) {
             'priority'                  => 20,
             ) 
         ) );
+      //footer SETTINGS
+        $wp_customize->add_section('pixfly_footer_section', array(
+		'title'                     => __('Footer Section', 'pixfly'),
+		'description'               => __('Footer settings','pixfly'),
+		'priority'                  => 80,
+		'panel'                     => 'pixfly_general_panel'
 
+
+	));
+        $wp_customize->add_setting( 'pixfly_footer_image', array(
+		'default'                   => esc_url( get_template_directory_uri() . '/assets/img/footer.jpg' ),
+		'type'                      => 'theme_mod',
+		'capability'                => 'edit_theme_options',
+		'sanitize_callback'         => 'esc_url_raw',
+	) );
+
+	 	$wp_customize->add_control( new WP_Customize_Image_Control(
+		$wp_customize,'pixfly_footer_image', array(
+			'label'                     => __( 'Background Image', 'pixfly' ),
+			'section'                   => 'pixfly_footer_section',
+			'settings'                  => 'pixfly_footer_image',
+			'context'                   => 'pixfly_footer_image',
+			'priority'                  => 19,
+		) 
+	) );
 
 }
 add_action( 'customize_register', 'pixfly_customize_register' );
