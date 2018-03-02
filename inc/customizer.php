@@ -15,6 +15,7 @@ function pixfly_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 	$wp_customize->get_control( 'header_image'  )->section   = 'pixfly_header_intro';
+  load_template( get_template_directory() . '/inc/lib/fonts-control.php', true ) ;
 
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial( 'blogname', array(
@@ -40,13 +41,34 @@ function pixfly_customize_register( $wp_customize ) {
 
 	}
 
-//*************************** PIXFLY SETTINGS PANEL ***************************//
+//*************************** PIXFLY FRONTPAGE SETTINGS PANEL ***************************//
 	$wp_customize->add_panel( 'pixfly_general_panel' ,array(
 		'priority'              => 50,
 		'title'                 => esc_html__( 'FRONTPAGE settings', 'pixfly' ),
 		'description'           => '',
 	) );
+//*************************** PIXFLY GLOBAL SETTINGS PANEL ***************************//
+	$wp_customize->add_panel( 'pixfly_global_panel' ,array(
+		'priority'              => 51,
+		'title'                 => esc_html__( 'GLOBAL settings', 'pixfly' ),
+		'description'           => '',
+	) );	
+	//site TITLE LOGO
+    $wp_customize->add_setting( 'pixfly_logo_layout', array(
+		'default'                   => 'top-header',
+		'sanitize_callback'         =>'pixfly_sanitize_choices',
+	) );
 
+	$wp_customize->add_control( 'pixfly_logo_layout', array(
+		'label'                     => 'Logo layout Setting',
+		'section' 					=> 'title_tagline',
+		'type'                      => 'radio',
+		'choices'                   => array(
+			'top-header' => esc_html__( 'Default', 'pixfly' ),
+			'top-header-centre' => esc_html__( 'Centre-layout', 'pixfly' ),               
+		),
+		'priority' => 3
+	) );
 	// HEADER intro
 	$wp_customize->add_section( 'pixfly_header_intro', array(
 		'title'          => __('Header Intro', 'pixfly' ),
@@ -267,7 +289,7 @@ function pixfly_customize_register( $wp_customize ) {
             'title'                     => __('Getin Touch Section', 'pixfly'),
             'priority'                  => 1,   
             'description'     		    => 'edit your portfolio getin touch section',
-            'panel'                     => 'pixfly_panel_2'
+            'panel'                     => 'pixfly_global_panel'
 
         ));
     
@@ -339,6 +361,45 @@ function pixfly_customize_register( $wp_customize ) {
 			'priority'                  => 19,
 		) 
 	) );
+	 /********* Fonts**********/
+
+$wp_customize->add_section('pixfly_font_settings', array(
+    'title'                     => __('Font Settings', 'pixfly'),
+    'description'               => 'Change font family, size and color (Headings & Paragraph) for Homepage, Blog Posts & Pages.',
+    'priority'                  => 65,
+    'panel'                     => 'pixfly_global_panel'
+
+));	
+	//font SETTINGS
+
+	$font_choices = customizer_library_get_font_choices();
+
+$wp_customize->add_setting( 'pixfly_paragraph_font', array(
+    'default'        => 'PT Serif',
+    'sanitize_callback' =>'pixfly_customizer_library_sanitize_font_choice',
+) );
+
+$wp_customize->add_control( 'pixfly_paragraph_font', array(
+    'label'   => esc_attr__('Pick Paragraph Font Family', 'pixfly' ),
+    'description'   => esc_attr__('Default : PT Serif', 'pixfly' ),
+    'section' => 'pixfly_font_settings',
+    'type'    => 'select',
+    'choices' => $font_choices,
+    'priority' => 1,
+    )); 	
+$wp_customize->add_setting( 'pixfly_heading_font_family', array(
+    'default'        => 'sans-serif',
+    'sanitize_callback' =>'pixfly_customizer_library_sanitize_font_choice',
+) );
+
+$wp_customize->add_control( 'pixfly_heading_font_family', array(
+    'label'   => esc_attr__('Pick Heading Font Family', 'pixfly' ),
+    'description'   => esc_attr__('Default : sans-serif', 'pixfly' ),
+    'section' => 'pixfly_font_settings',
+    'type'    => 'select',
+    'choices' => $font_choices,
+    'priority' => 2,
+    )); 	
 
 }
 add_action( 'customize_register', 'pixfly_customize_register' );

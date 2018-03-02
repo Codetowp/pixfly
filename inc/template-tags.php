@@ -196,3 +196,13 @@ $days = round((date('U') - get_the_time('U')) / (60*60*24));
 
 
 endif;
+function customizer_library_get_default( $setting ) {
+
+	$customizer_library = Customizer_Library::Instance();
+	$options = $customizer_library->get_options();
+
+	if ( isset( $options[$setting]['default'] ) ) {
+		return $options[$setting]['default'];
+	}
+
+}

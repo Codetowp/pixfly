@@ -83,9 +83,11 @@ if ( ! function_exists( 'pixfly_setup' ) ) :
 			'flex-width'  => true,
 			'flex-height' => true,
 		) );
+		require get_template_directory() . '/inc/customizer-library.php';
 	}
 endif;
 add_action( 'after_setup_theme', 'pixfly_setup' );
+
 /**
  * Registers social widget
  */
@@ -177,7 +179,22 @@ function pixfly_scripts() {
 		document.getElementById("main-block").style.marginRight= "0";}');
 }
 add_action( 'wp_enqueue_scripts', 'pixfly_scripts' );
+/*fonts*/
+function pixfly_font_styles() {
 
+	// Font options
+	$fonts = array(
+		get_theme_mod( 'pixfly_paragraph_font', customizer_library_get_default( 'primary-font' ) ),
+		get_theme_mod( 'pixfly_heading_font_family', customizer_library_get_default( 'secondary-font' ) )
+	);
+
+	$font_uri = customizer_library_get_google_font_uri( $fonts );
+
+	// Load Google Fonts
+	wp_enqueue_style( 'pixfly_font_styles', $font_uri, array(), null, 'screen' );
+
+}
+add_action( 'wp_enqueue_scripts', 'pixfly_font_styles' );
 /**
  * Implement the Custom Header feature.
  */
@@ -211,3 +228,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+/**
+ * Custom font style.
+ */
+require get_template_directory() . '/inc/lib/print_styles.php';

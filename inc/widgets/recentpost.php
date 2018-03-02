@@ -45,7 +45,7 @@ function __construct() {
               
                  <li class="media"> <a class="pull-left no-pddig" href="<?php the_permalink(); ?>">
 					<?php if  ( get_the_post_thumbnail()=='') { ?>
-					<img src="<?php echo esc_url(get_template_directory_uri()."/img/default.jpg");?> ">		
+					<img src="<?php echo esc_url(get_template_directory_uri()."/assets/img/default.jpg");?> ">		
 					<?php } 
 					else
 					{

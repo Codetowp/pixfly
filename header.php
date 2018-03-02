@@ -61,7 +61,7 @@ foreach ( $socials as $social => $name ) {
 <div id="main-block"> 
 
 <!-- Header section -->
-<header id="top-header">
+<header id="<?php echo esc_html(get_theme_mod('pixfly_logo_layout','top-header')); ?>">
 <div class="container">
 <div class="row">
   <?php
@@ -78,10 +78,8 @@ foreach ( $socials as $social => $name ) {
 
       ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="company-logo"> <img src="<?php echo esc_url($img);  ?>" class="pull-left logo"></a><?php } ?>
       <div class="clearfix"></div>
-      <?php
-
-      echo '<span class="company-name">' . esc_html(get_bloginfo( 'name' )) . '</span>';
-
+     <span class="company-name"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo esc_html(get_bloginfo( 'name' )); ?> </a></span>
+<?php
       $pixfly_header_description  = get_theme_mod( 'pixfly_header_description',__( 'Section Description' , 'pixfly' ));
 
       if ($pixfly_header_description != '') echo '<p class="head-content wow fadeInDown" >' . wp_kses_post( $pixfly_header_description ) . ' </p>'; 
