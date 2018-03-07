@@ -31,7 +31,14 @@ if($blog_layout =='default'){
           
           
           <!--page nav-->
-          <nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
+         
+        <!--page nav--> 
+      <?php else :
+      
+      get_template_part( 'template-parts/content', 'none' );
+      
+      endif; ?>
+     <nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
             <ul>
               <li>
                <?php
@@ -45,12 +52,6 @@ if($blog_layout =='default'){
             </li>
           </ul>
         </nav>
-        <!--page nav--> 
-      <?php else :
-      
-      get_template_part( 'template-parts/content', 'none' );
-      
-      endif; ?>
     </div>
     <!--blog container--> 
     
@@ -77,21 +78,7 @@ if($blog_layout =='default'){
     endwhile; ?>
     
     
-    <!--page nav-->
-    <nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
-      <ul>
-        <li>
-         <?php
-         the_posts_pagination(
-          array(
-            'prev_text' => '<i class="fa fa-chevron-left"></i>' ,
-            'next_text' =>  '<i class="fa fa-chevron-right"></i>',
-          )
-        );
-        ?>
-      </li>
-    </ul>
-  </nav>
+    
   <!--page nav--> 
 <?php else :
 
@@ -99,7 +86,20 @@ get_template_part( 'template-parts/content', 'none' );
 
 endif; ?>
 <!--page nav--> 
-
+<nav class="navigation posts-navigation  wow fdeInUp" role="navigation" >
+            <ul>
+              <li>
+               <?php
+               the_posts_pagination(
+                array(
+                  'prev_text' => '<i class="fa fa-chevron-left"></i>' ,
+                  'next_text' =>  '<i class="fa fa-chevron-right"></i>',
+                )
+              );
+              ?>
+            </li>
+          </ul>
+        </nav>
 </section>
 
 
