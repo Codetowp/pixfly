@@ -29,8 +29,21 @@ get_header(); ?>
             <?php if ( have_posts() ) : ?>
               <?php while ( have_posts() ) : the_post(); ?>
                 <p><?php the_content(); ?></p>
-                <?php 
-              endwhile;endif;
+                <div class="clearfix"></div>
+               <div><b>Project-types:</b> <?php 
+                      $before='';
+                      $after='';
+                      $separator=',';
+                      the_terms(get_the_ID(), 'jetpack-portfolio-type', $before, $separator, $after); 
+                      ?></div>
+               <div><b>Project-tags:</b><?php 
+                      $before='';
+                      $after='';
+                      $separator=',';
+                      the_terms(get_the_ID(), 'jetpack-portfolio-tag', $before, $separator, $after); 
+                      ?></div>
+            
+            <?php  endwhile;endif;
               wp_reset_postdata();
               ?>
             </div>
@@ -46,7 +59,7 @@ get_header(); ?>
           <div class="col-md-10 col-md-offset-1">
             <ul>
               <li class="prev-nav"><?php previous_post_link('%link', 'Previous Project'); ?> </li>
-              <li class="back-nav"><a href="#">back to all projects</a></li>
+              <li class="back-nav"><a href="<?php echo esc_url(home_url( '/portfolio' )); ?>"><?php esc_html_e('back to all projects','pixfly'); ?></a></li>
               <li class="next-nav"><?php next_post_link('%link', 'Next Project'); ?></li>
             </ul>
           </div>

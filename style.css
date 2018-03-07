@@ -3362,7 +3362,7 @@ ol.type li a.active {
 	clear: both;
 }
 .btn-nobordered {
-	color: #ffffff;
+	color: #80909c;
 	background-color: transparent;
 	border-color: transparent;
 }
@@ -3371,7 +3371,7 @@ ol.type li a.active {
 	transition: all 0.5s;
 }
 .btn-bordered {
-	color: #ffffff;
+	color: #80909c;
 	background-color: transparent;
 	border-color: #fff;
 }
@@ -4416,4 +4416,7 @@ aside {
 }
 }
  @media (max-width: 360px) {
+}
+.sticky {
+	display: block;
 }

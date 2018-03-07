@@ -24,7 +24,9 @@ if ( post_password_required() ) {
 
 	<?php
 	// You can start editing here -- including this comment!
-	if ( have_comments() ) : ?>
+	if ( have_comments() ) : 
+    
+		?>
 		<h2 class="comments-title">
 			<?php
 			$comment_count = get_comments_number();
@@ -52,6 +54,7 @@ if ( post_password_required() ) {
 				wp_list_comments( array(
 					'style'      => 'ol',
 					'short_ping' => true,
+					'avatar_size'=> 100,
 				) );
 			?>
 		</ol><!-- .comment-list -->
