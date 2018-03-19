@@ -69,7 +69,7 @@
     
     <!--footer copyright-->
     <div class="col-md-12 footer-copyright">
-      <p><?php esc_html_e('ALL RIGHTS RESERVED. COPYRIGHT &#169; 2017. A theme by', 'pixfly');?> </p>
+      <p><?php esc_html_e('COPYRIGHT &#169; 2018. A theme by Devfloat', 'pixfly');?> </p>
     </div>
     <!--/footer copyright--> 
     
