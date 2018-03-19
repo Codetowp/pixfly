@@ -12,8 +12,13 @@
 	<header class="entry-header" style="background-image:url(<?php the_post_thumbnail_url(); ?>);">
 		<div class="container">
 			<div class="row"> <a href="<?php the_permalink(); ?>">
+				<?php
+$category = get_the_category(); 
+
+?><small><?php echo esc_html($category[0]->cat_name); ?></small>
 				<h2><?php the_title(); ?></h2>
-			</a> <span class="date-article"><?php pixfly_days_ago(); ?></span> <a href="<?php the_permalink(); ?>" class="btn btn-nobordered"><i class="fa fa-arrow-right"></i><?php esc_html_e('Read more','pixfly'); ?></a> </div>
+			<div class="clearfix"></div>
+                <a class="read-well" href="<?php the_permalink(); ?>"><?php esc_html_e('Read More','intensify'); ?></a></div>
 		</div>
 	</header>  
 </article>

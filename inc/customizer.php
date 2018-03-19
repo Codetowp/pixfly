@@ -285,7 +285,7 @@ function pixfly_customize_register( $wp_customize ) {
 		'priority' => 5
 	) );
 	//get in touch
-	$wp_customize->add_section('getin_touch_section', array(
+	$wp_customize->add_section('pixfly_getin_touch_section', array(
             'title'                     => __('Getin Touch Section', 'pixfly'),
             'priority'                  => 1,   
             'description'     		    => 'edit your portfolio getin touch section',
@@ -293,34 +293,34 @@ function pixfly_customize_register( $wp_customize ) {
 
         ));
     
-        $wp_customize->add_setting( 'getin_touch_section_header', array(      
+        $wp_customize->add_setting( 'pixfly_getin_touch_section_header', array(      
             'default'                   => esc_html__('Section Title', 'pixfly'),
             'sanitize_callback'         => 'sanitize_text_field',
             'transport'                 => 'refresh', // refresh or postMessage              
         ) );    
 
-        $wp_customize->add_control( 'getin_touch_section_header', array(
+        $wp_customize->add_control( 'pixfly_getin_touch_section_header', array(
             'type'						=> 'text',
             'label' 					=> __( 'Header', 'pixfly' ),
-            'section'  					=> 'getin_touch_section',
+            'section'  					=> 'pixfly_getin_touch_section',
             'priority' 					=> 1,
         ) );
     
         
-        $wp_customize->add_setting( 'getin_touch_section_tag_line', array(      
+        $wp_customize->add_setting( 'pixfly_getin_touch_section_tag_line', array(      
             'default'                   => esc_html__('Section Tag Line', 'pixfly'),
             'sanitize_callback'         => 'sanitize_text_field',
             'transport'                 => 'refresh', // refresh or postMessage              
         ) );    
 
-        $wp_customize->add_control( 'getin_touch_section_tag_line', array(
+        $wp_customize->add_control( 'pixfly_getin_touch_section_tag_line', array(
             'type'						=> 'text',
             'label' 					=> __( 'Tag Line', 'pixfly' ),
-            'section'  					=> 'getin_touch_section',
+            'section'  					=> 'pixfly_getin_touch_section',
             'priority' 					=> 2,
         ) );
     
-        $wp_customize->add_setting( 'getin_touch_section_image', array(
+        $wp_customize->add_setting( 'pixfly_getin_touch_section_image', array(
             'default'           => esc_url( get_template_directory_uri() . '/assets/img/bg-1.jpg' ),
             'type'                      => 'theme_mod',
             'capability'                => 'edit_theme_options',
@@ -328,14 +328,39 @@ function pixfly_customize_register( $wp_customize ) {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Image_Control(
-            $wp_customize,'getin_touch_section_bck_image', array(
+            $wp_customize,'pixfly_getin_touch_section_bck_image', array(
             'label'                     => __( 'Background Image', 'pixfly' ),
-            'section'                   => 'getin_touch_section',
-            'settings'                  => 'getin_touch_section_image',
-            'context'                   => 'getin_touch_section_image',
+            'section'                   => 'pixfly_getin_touch_section',
+            'settings'                  => 'pixfly_getin_touch_section_image',
+            'context'                   => 'pixfly_getin_touch_section_image',
             'priority'                  => 20,
             ) 
         ) );
+    $wp_customize->add_setting( 'pixfly_getin_touch_button_text', array(      
+		'default'                   => __('Button Text', 'pixfly'),
+		'sanitize_callback'         => 'sanitize_text_field',
+        'transport'                 => 'refresh', // refresh or postMessage              
+    ) );    
+
+	$wp_customize->add_control( 'pixfly_getin_touch_button_text', array(
+		'type'						=> 'text',
+		'label' 					=> __( 'Button Text', 'pixfly' ),
+		'section'  					=> 'pixfly_getin_touch_section',
+		'priority' 					=> 17,
+	) );   
+	$wp_customize->add_setting( 'pixfly_getin_touch_button_url', array(      
+		'default'                   =>  '#',
+		'sanitize_callback'         => 'esc_url_raw',
+        'transport'                 => 'refresh', // refresh or postMessage              
+    ) );    
+
+	$wp_customize->add_control( 'pixfly_getin_touch_button_url', array(
+		'type'                      => 'text',
+		'label'                     => __( 'Button Url', 'pixfly' ),
+		'section'                   => 'pixfly_getin_touch_section',
+		'priority'                  => 18,
+	) );   
+	
       //footer SETTINGS
         $wp_customize->add_section('pixfly_footer_section', array(
 		'title'                     => __('Footer Section', 'pixfly'),

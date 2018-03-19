@@ -77,18 +77,18 @@ get_header(); ?>
       <div class="content">
         <h2>
           <?php 
-          $pixfly_main_title  = get_theme_mod( 'getin_touch_section_header', esc_html__('GET IN TOUCH', 'pixfly' ));
+          $pixfly_main_title  = get_theme_mod( 'pixfly_getin_touch_section_header', esc_html__('Section Title', 'pixfly' ));
           
           if ($pixfly_main_title != '') echo '<span>  ' . wp_kses_post($pixfly_main_title) . ' </span>'; 
           ?>
         </h2>
         <p>
           <?php 
-          $pixfly_tag_line  = get_theme_mod( 'getin_touch_section_tag_line', esc_html__('Design is the creation of a plan', 'pixfly' ));
+          $pixfly_tag_line  = get_theme_mod( 'pixfly_getin_touch_section_tag_line', esc_html__('Section Tag Line', 'pixfly' ));
           
           if ($pixfly_tag_line != '') echo '<span>  ' . wp_kses_post($pixfly_tag_line) . ' </span>'; 
           ?></p>
-          <a href="#" class="btn"><?php esc_html_e('contact us','pixfly'); ?></a> </div>
+          <a href="<?php echo esc_url(get_theme_mod('pixfly_getin_touch_button_url','#')); ?>" class="btn"><?php echo esc_html(get_theme_mod('pixfly_getin_touch_button_text','Button Text')); ?></a> </div>
         </section>
         <?php
         get_footer();
