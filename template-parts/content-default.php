@@ -10,7 +10,7 @@
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="wow fadeInUp">
 	
-	<header class="entry-header"> <img src="<?php the_post_thumbnail_url('pixfly_blog_post'); ?>">
+	<header class="entry-header"> <?php if(has_post_thumbnail() ): ?><img src="<?php the_post_thumbnail_url('pixfly_blog_post'); ?>"><?php else:?><img src="<?php echo esc_url( get_template_directory_uri('pixfly_blog_post') . '/assets/img/default.jpg' );?>"><?php endif; ?>
 		<div class="content-block"> <a href="<?php the_permalink(); ?>">
 			<h2><?php the_title(); ?></h2>
 		</a>

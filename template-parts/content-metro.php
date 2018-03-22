@@ -9,7 +9,7 @@
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="wow fadeInUp">
-	<header class="entry-header" style="background-image:url(<?php the_post_thumbnail_url(); ?>);">
+	<header class="entry-header" style="background-image:<?php if(has_post_thumbnail() ): ?>url(<?php the_post_thumbnail_url(); ?>)<?php else:?>url(<?php echo esc_url(get_template_directory_uri() . '/assets/img/default.jpg' ); ?>)<?php endif; ?>;">
 		<div class="container">
 			<div class="row"> <a href="<?php the_permalink(); ?>">
 				<?php
